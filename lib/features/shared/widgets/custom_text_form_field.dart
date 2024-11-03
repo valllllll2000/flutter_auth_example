@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-
 class CustomTextFormField extends StatelessWidget {
-
   final String? label;
   final String? hint;
   final String? errorMessage;
@@ -12,56 +10,72 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const CustomTextFormField({
-    super.key, 
-    this.label, 
-    this.hint, 
-    this.errorMessage, 
+    super.key,
+    this.label,
+    this.hint,
+    this.errorMessage,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    this.onChanged, 
-    this.validator, 
+    this.onChanged,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-
     final colors = Theme.of(context).colorScheme;
 
-    final border = OutlineInputBorder(
-      borderSide: const BorderSide(color: Colors.transparent),
-      borderRadius: BorderRadius.circular(40)
-    );
+    final transparentBorder = OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.transparent),
+        borderRadius: BorderRadius.circular(40));
 
     const borderRadius = Radius.circular(15);
+
+    const specialBorderRadius = BorderRadius.only(
+        topLeft: borderRadius,
+        bottomLeft: borderRadius,
+        bottomRight: borderRadius);
+
+    final errorBorder = OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.redAccent.shade100),
+        borderRadius: specialBorderRadius);
 
     return Container(
       // padding: const EdgeInsets.only(bottom: 0, top: 15),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(topLeft: borderRadius, bottomLeft: borderRadius, bottomRight: borderRadius ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 10,
-            offset: const Offset(0,5)
-          )
-        ]
-      ),
+          color: Colors.white,
+          borderRadius: specialBorderRadius,
+          boxShadow: [
+            BoxShadow(
+                color: errorMessage == null
+                    ? Colors.black.withOpacity(0.06)
+                    : Colors.red.withOpacity(0.2),
+                blurRadius: 10,
+                offset: const Offset(0, 5))
+          ]),
       child: TextFormField(
         onChanged: onChanged,
         validator: validator,
         obscureText: obscureText,
         keyboardType: keyboardType,
-        style: const TextStyle( fontSize: 20, color: Colors.black54 ),
+        style: const TextStyle(fontSize: 20, color: Colors.black87),
         decoration: InputDecoration(
-          floatingLabelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-          enabledBorder: border,
-          focusedBorder: border,
-          errorBorder: border.copyWith( borderSide: BorderSide( color: Colors.red.shade800 )),
-          focusedErrorBorder: border.copyWith( borderSide: BorderSide( color: Colors.red.shade800 )),
+          floatingLabelStyle: TextStyle(
+              color: errorMessage != null
+                  ? Colors.red.withOpacity(0.6)
+                  : Colors.black.withOpacity(0.6),
+              fontSize: 18),
+          enabledBorder: transparentBorder,
+          focusedBorder: transparentBorder,
+          errorBorder: transparentBorder,
+          focusedErrorBorder: transparentBorder,
           isDense: true,
           label: label != null ? Text(label!) : null,
+          labelStyle: TextStyle(
+              color: errorMessage != null
+                  ? Colors.red.withOpacity(0.6)
+                  : Colors.black.withOpacity(0.6)),
           hintText: hint,
+          errorStyle: TextStyle(color: Colors.red.withOpacity(0.6)),
           errorText: errorMessage,
           focusColor: colors.primary,
           // icon: Icon( Icons.supervised_user_circle_outlined, color: colors.primary, )
