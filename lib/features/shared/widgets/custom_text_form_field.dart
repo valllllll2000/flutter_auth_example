@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? label;
+  final String? initialValue;
   final String? hint;
   final String? errorMessage;
   final bool obscureText;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
+  final Function(String)? onFieldSubmitted;
 
   const CustomTextFormField({
     super.key,
@@ -18,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onChanged,
     this.validator,
+    this.onFieldSubmitted, this.initialValue,
   });
 
   @override
@@ -35,10 +38,6 @@ class CustomTextFormField extends StatelessWidget {
         bottomLeft: borderRadius,
         bottomRight: borderRadius);
 
-    final errorBorder = OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.redAccent.shade100),
-        borderRadius: specialBorderRadius);
-
     return Container(
       // padding: const EdgeInsets.only(bottom: 0, top: 15),
       decoration: BoxDecoration(
@@ -53,6 +52,8 @@ class CustomTextFormField extends StatelessWidget {
                 offset: const Offset(0, 5))
           ]),
       child: TextFormField(
+        initialValue: initialValue,
+        onFieldSubmitted: onFieldSubmitted,
         onChanged: onChanged,
         validator: validator,
         obscureText: obscureText,
