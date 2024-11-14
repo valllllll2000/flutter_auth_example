@@ -11,7 +11,7 @@ class AuthDataSourceImpl extends AuthDataSource {
   Future<User> checkAuthStatus(String token) async {
     try {
       final response = await dio
-          .post('/auth/check-status', options: Options(headers: {'Authorization': 'Bearer $token'}));
+          .get('/auth/check-status', options: Options(headers: {'Authorization': 'Bearer $token'}));
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
     } on DioException catch (e) {

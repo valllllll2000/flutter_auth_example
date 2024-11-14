@@ -76,7 +76,6 @@ class _LoginForm extends ConsumerWidget {
           Text('Login', style: textStyles.titleLarge),
           const SizedBox(height: 90),
           CustomTextFormField(
-            initialValue: 'test1@google.com',
             label: 'Correo',
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) =>
@@ -86,7 +85,6 @@ class _LoginForm extends ConsumerWidget {
           ),
           const SizedBox(height: 30),
           CustomTextFormField(
-            initialValue: 'Abc123',
             label: 'Contraseña',
             obscureText: true,
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
