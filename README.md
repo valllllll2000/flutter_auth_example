@@ -1,6 +1,6 @@
 # Flutter - Authenticated CRUD App - TesloShop
 
-Proyect based on https://github.com/Klerith/flutter-authenticated-crud/tree/01-basic-ui, created during the course: https://fernando-herrera.com/course/flutter-cero-experto 
+Project based on https://github.com/Klerith/flutter-authenticated-crud/tree/01-basic-ui, created during the course: https://fernando-herrera.com/course/flutter-cero-experto 
 
 Worked on:
 
